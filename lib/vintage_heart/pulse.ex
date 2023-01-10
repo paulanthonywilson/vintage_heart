@@ -12,8 +12,9 @@ defmodule VintageHeart.Pulse do
   use GenServer
   use VintageHeart.Vintagenet
 
+  alias VintageHeart.Configuration
+
   @name __MODULE__
-  @poll_interval :timer.seconds(10)
   require Logger
 
   defstruct offline_this_period_count: 0,
@@ -41,7 +42,7 @@ defmodule VintageHeart.Pulse do
       Logger.info("No heartbeat set")
     end
 
-    Process.send_after(self(), :check, @poll_interval)
+    schedule_poll()
 
     {:ok, %__MODULE__{}}
   end
@@ -55,7 +56,7 @@ defmodule VintageHeart.Pulse do
   end
 
   def handle_info(:check, s) do
-    Process.send_after(self(), :check, @poll_interval)
+    schedule_poll()
     {:noreply, check(s)}
   end
 
@@ -99,16 +100,22 @@ defmodule VintageHeart.Pulse do
     Vintagenet.get_properties(["interface", "wlan0", "connection"])
   end
 
-  defp maybe_kick_vintage_net(%{offline_this_period_count: 24} = s) do
-    Vintagenet.kick()
-    %{s | offline_this_period_count: 0, last_kick: DateTime.utc_now()}
+  defp maybe_kick_vintage_net(%{offline_this_period_count: offline_this_period_count} = s) do
+    if offline_this_period_count == Configuration.offline_kick_count() do
+      Vintagenet.kick()
+      %{s | offline_this_period_count: 0, last_kick: DateTime.utc_now()}
+    else
+      s
+    end
   end
 
-  defp maybe_kick_vintage_net(s), do: s
-
-  defp maybe_set_status_to_down(%{offline_count: 84} = s), do: %{s | status: :down}
-
-  defp maybe_set_status_to_down(s), do: s
+  defp maybe_set_status_to_down(%{offline_count: offline_count} = s) do
+    if offline_count == Configuration.offline_status_down_count() do
+      %{s | status: :down}
+    else
+      s
+    end
+  end
 
   defp hotspot?, do: {192, 168, 0, 1} == ipv4()
 
@@ -116,6 +123,10 @@ defmodule VintageHeart.Pulse do
     ["interface", "wlan0", "addresses"]
     |> Vintagenet.get_properties()
     |> find_ipv4()
+  end
+
+  defp schedule_poll do
+    Process.send_after(self(), :check, Configuration.poll_interval_millis())
   end
 
   defp find_ipv4(nil), do: nil
