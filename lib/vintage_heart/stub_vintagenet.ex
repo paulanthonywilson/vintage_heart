@@ -1,6 +1,9 @@
 # credo:disable-for-this-file Credo.Check.Readability.LargeNumbers
 defmodule VintageHeart.StubVintagenet do
-  @moduledoc false
+  @moduledoc """
+  Pretends to be VintageNet while running on the host machine. Pretends to have a connection
+  and kicking does nothing.
+  """
 
   @behaviour VintageHeart.Vintagenet
   @doc """

@@ -1,6 +1,6 @@
 defmodule VintageHeart.Vintagenet do
   @moduledoc """
-  Indirection layer for `VintageNet` so we can test etc... off
+  Indirection layer for `VintageNet` used within this project so we can test etc... off
   the hardware. Usage
 
   ```
@@ -14,6 +14,11 @@ defmodule VintageHeart.Vintagenet do
   Indirection for `VintageNet.get/1` (no default)
   """
   @callback get_properties([String.t()]) :: any()
+
+  @doc """
+  Give VintageNet a kick to induce reacquiring a (WiFi) connection, by killing
+  `VintageNet.RouteManager`
+  """
   @callback kick :: :ok
 
   defmacro __using__(_) do

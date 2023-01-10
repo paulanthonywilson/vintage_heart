@@ -13,7 +13,7 @@ defmodule VintageHeart.VintagenetTest do
     assert VintageHeart.StubVintagenet == Vintagenet.implementation(:prod, :host)
   end
 
-  test "when envs is not test, and the target is not host, then the implementation is the real deal" do
+  test "when env is not test, and the target is not host, then the implementation is the real deal" do
     assert VintageHeart.RealVintagenet == Vintagenet.implementation(:dev, :rpi0)
     assert VintageHeart.RealVintagenet == Vintagenet.implementation(:prod, :rpi0)
     assert VintageHeart.RealVintagenet == Vintagenet.implementation(:prod, :rpi3)
