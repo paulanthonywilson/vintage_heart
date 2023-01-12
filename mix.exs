@@ -8,7 +8,9 @@ defmodule VintageHeart.MixProject do
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       elixirc_paths: elixirc_paths(Mix.env()),
-      deps: deps()
+      deps: deps(),
+      package: package(),
+      docs: docs()
     ]
   end
 
@@ -21,11 +23,25 @@ defmodule VintageHeart.MixProject do
 
   defp deps do
     [
+      {:credo, "~> 1.6", only: [:dev, :test]},
       {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false},
-      {:credo, "~> 1.6", only: [:dev, :test]}
+      {:ex_doc, "~> 0.29.1", only: :dev, runtime: false}
     ]
   end
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
+
+  defp package() do
+    [
+      description:
+        "For Nerves projects that need an Internet connection, monitors and gives VintageNet a kick and eventually causes a reboot if connectivity is lost",
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/paulanthonywilson/vintage_heart/"}
+    ]
+  end
+
+  defp docs do
+    [main: "readme", extras: ["README.md"]]
+  end
 end

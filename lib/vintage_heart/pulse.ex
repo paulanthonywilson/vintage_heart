@@ -117,7 +117,7 @@ defmodule VintageHeart.Pulse do
     end
   end
 
-  defp hotspot?, do: {192, 168, 0, 1} == ipv4()
+  defp hotspot?, do: Configuration.wizard_hotspot_ip() == ipv4()
 
   defp ipv4 do
     ["interface", "wlan0", "addresses"]
