@@ -15,7 +15,7 @@ It does this by doing the following:
 Note that 
 
 * If the "wlan0" IP address is _192.168.0.1_ (or as otherwise configured) then it's assumed that the [VintageNetWizard](https://hexdocs.pm/vintage_net_wizard/readme.html) is being used to set up the WiFi connection, and checks will not happen
-* If you compile with the default `MIX_TARGET` being host, then checking is also essentially disabled. That is it will not get in the way of you running `iex -S mix` to try out your "nerves" code on your development machine. \
+* If you compile with the default `MIX_TARGET` being host, then checking is also essentially disabled. That is it will not get in the way of you running `iex -S mix` to try out your "nerves" code on your development machine. 
 * Connectivity is determined by having an "Internet connection", rather than a network connection. You can configure what having an "Internet connection" means via [VintageNet](https://hexdocs.pm/vintage_net/readme.html#internet-connectivity-checks)
 
 This is a straight extraction, more or less, from an existing project.
