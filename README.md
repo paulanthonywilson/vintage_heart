@@ -20,6 +20,25 @@ Note that
 
 This is a straight extraction, more or less, from an existing project.
 
+## Has anything happened?
+
+You might be interested to know if anything has happened. You can check with
+
+```elixir
+
+iex(1)> VintageNet.Pulse.full_status()
+%VintageHeart.Pulse{
+  offline_this_period_count: 0,
+  offline_count: 0,
+  status: :ok,
+  highest_offline: 25,
+  last_kick: ~U[2023-01-19 15:35:55.603980Z]
+}
+```
+
+Reboots aren't logged though you can check uptime for that.
+
+
 ## Configuration
 
 If you do not like the defaults then you can add some configuration to your project. The following example does nothing, in that it pointlessly confirms the default values, but you might want to change them.

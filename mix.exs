@@ -4,7 +4,7 @@ defmodule VintageHeart.MixProject do
   def project do
     [
       app: :vintage_heart,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -42,6 +42,6 @@ defmodule VintageHeart.MixProject do
   end
 
   defp docs do
-    [main: "readme", extras: ["README.md"]]
+    [main: "readme", extras: ["README.md", "CHANGELOG.md"]]
   end
 end

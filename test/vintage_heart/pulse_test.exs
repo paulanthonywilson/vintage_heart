@@ -87,6 +87,15 @@ defmodule VintageHeart.PulseTest do
              })
   end
 
+  test "smoke test the GenServer calls" do
+    # Make sure these simple methods are properly wired up, which
+    # has not always been the case
+
+    assert nil == Pulse.last_kick()
+    assert :ok == Pulse.status()
+    assert %Pulse{} = Pulse.full_status()
+  end
+
   defp set_ip4(addr) do
     addresses = [
       %{
