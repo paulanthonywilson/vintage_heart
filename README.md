@@ -62,7 +62,7 @@ config :vintage_heart, VintageHeart.Pulse
 defp deps do
   [
     # etc...
-     {:vintage_heart, "~> 0.1.0"},
+     {:vintage_heart, "~> 0.1"},
      # etc ... 
   ]
 end
