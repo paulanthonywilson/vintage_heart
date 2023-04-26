@@ -28,7 +28,7 @@ defmodule VintageHeart.Pulse do
           offline_count: pos_integer(),
           status: :ok | :down,
           highest_offline: pos_integer(),
-          last_kick: nil | DateTime.utc_now()
+          last_kick: nil | DateTime.t()
         }
   def(start_link(opts)) do
     GenServer.start_link(__MODULE__, opts, name: @name)
@@ -41,7 +41,7 @@ defmodule VintageHeart.Pulse do
   @doc """
   When was the last time the newtwork kicked?
   """
-  @spec last_kick :: nil | DateTime.utc_now()
+  @spec last_kick :: nil | DateTime.t()
   def last_kick do
     GenServer.call(@name, :last_kick)
   end
