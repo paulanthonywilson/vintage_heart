@@ -26,7 +26,7 @@ You might be interested to know if anything has happened. You can check with
 
 ```elixir
 
-iex(1)> VintageNet.Pulse.full_status()
+iex(1)> VintageHeart.Pulse.full_status()
 %VintageHeart.Pulse{
   offline_this_period_count: 0,
   offline_count: 0,
